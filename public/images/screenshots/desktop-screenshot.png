@@ -1,0 +1,44 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#f8f9fa"/>
+  <!-- Header -->
+  <rect x="0" y="0" width="1280" height="80" fill="#800020"/>
+  <text x="40" y="50" font-family="Arial, sans-serif" font-size="24" fill="white" font-weight="bold">SIMS - Student Information Management System</text>
+  
+  <!-- Sidebar -->
+  <rect x="0" y="80" width="250" height="640" fill="#2c3e50"/>
+  <text x="20" y="120" font-family="Arial, sans-serif" font-size="16" fill="white">Dashboard</text>
+  <text x="20" y="160" font-family="Arial, sans-serif" font-size="16" fill="#bdc3c7">Students</text>
+  <text x="20" y="200" font-family="Arial, sans-serif" font-size="16" fill="#bdc3c7">Courses</text>
+  <text x="20" y="240" font-family="Arial, sans-serif" font-size="16" fill="#bdc3c7">Reports</text>
+  
+  <!-- Main Content -->
+  <rect x="250" y="80" width="1030" height="640" fill="white"/>
+  <text x="280" y="130" font-family="Arial, sans-serif" font-size="28" fill="#2c3e50" font-weight="bold">Dashboard</text>
+  
+  <!-- Cards -->
+  <rect x="280" y="160" width="200" height="120" fill="#3498db" rx="8"/>
+  <text x="290" y="190" font-family="Arial, sans-serif" font-size="14" fill="white">Total Students</text>
+  <text x="290" y="250" font-family="Arial, sans-serif" font-size="32" fill="white" font-weight="bold">1,234</text>
+  
+  <rect x="500" y="160" width="200" height="120" fill="#2ecc71" rx="8"/>
+  <text x="510" y="190" font-family="Arial, sans-serif" font-size="14" fill="white">Active Courses</text>
+  <text x="510" y="250" font-family="Arial, sans-serif" font-size="32" fill="white" font-weight="bold">56</text>
+  
+  <rect x="720" y="160" width="200" height="120" fill="#e74c3c" rx="8"/>
+  <text x="730" y="190" font-family="Arial, sans-serif" font-size="14" fill="white">Pending Tasks</text>
+  <text x="730" y="250" font-family="Arial, sans-serif" font-size="32" fill="white" font-weight="bold">12</text>
+  
+  <!-- Table -->
+  <rect x="280" y="300" width="640" height="300" fill="white" stroke="#ecf0f1" stroke-width="1" rx="8"/>
+  <text x="290" y="330" font-family="Arial, sans-serif" font-size="18" fill="#2c3e50" font-weight="bold">Recent Students</text>
+  
+  <!-- Table rows -->
+  <rect x="290" y="350" width="620" height="40" fill="#f8f9fa"/>
+  <text x="300" y="375" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">John Doe - Computer Science - Active</text>
+  
+  <rect x="290" y="390" width="620" height="40" fill="white"/>
+  <text x="300" y="415" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">Jane Smith - Mathematics - Active</text>
+  
+  <rect x="290" y="430" width="620" height="40" fill="#f8f9fa"/>
+  <text x="300" y="455" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50">Mike Johnson - Physics - Inactive</text>
+</svg>

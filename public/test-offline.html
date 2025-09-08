@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Offline Test - SIMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .online { background-color: #28a745; }
+        .offline { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">PWA Offline Test</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h5>Connection Status</h5>
+                            <p id="connection-status">
+                                <span class="status-indicator online"></span>
+                                <span id="status-text">Online</span>
+                            </p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h5>Service Worker Status</h5>
+                            <p id="sw-status">Checking...</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h5>Cache Status</h5>
+                            <div id="cache-status">Checking caches...</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h5>Test Navigation</h5>
+                            <div class="d-grid gap-2">
+                                <a href="/dashboard" class="btn btn-primary">Go to Dashboard</a>
+                                <a href="/admin" class="btn btn-secondary">Go to Admin</a>
+                                <a href="/profile" class="btn btn-info">Go to Profile</a>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <strong>Instructions:</strong>
+                            <ol>
+                                <li>Make sure you're online and this page loads completely</li>
+                                <li>Check that the Service Worker is registered</li>
+                                <li>Disconnect your internet connection</li>
+                                <li>Try navigating to the links above</li>
+                                <li>You should see the offline page instead of a connection error</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Check online/offline status
+        function updateConnectionStatus() {
+            const indicator = document.querySelector('.status-indicator');
+            const statusText = document.getElementById('status-text');
+            
+            if (navigator.onLine) {
+                indicator.className = 'status-indicator online';
+                statusText.textContent = 'Online';
+            } else {
+                indicator.className = 'status-indicator offline';
+                statusText.textContent = 'Offline';
+            }
+        }
+        
+        // Check service worker status
+        function checkServiceWorker() {
+            const swStatus = document.getElementById('sw-status');
+            
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.ready.then(registration => {
+                    swStatus.innerHTML = `<span class="text-success">✓ Service Worker registered and ready</span>`;
+                    console.log('Service Worker ready:', registration);
+                }).catch(error => {
+                    swStatus.innerHTML = `<span class="text-danger">✗ Service Worker error: ${error.message}</span>`;
+                });
+            } else {
+                swStatus.innerHTML = '<span class="text-warning">⚠ Service Workers not supported</span>';
+            }
+        }
+        
+        // Check cache status
+        async function checkCaches() {
+            const cacheStatus = document.getElementById('cache-status');
+            
+            if ('caches' in window) {
+                try {
+                    const cacheNames = await caches.keys();
+                    let html = '<ul class="list-unstyled">';
+                    
+                    for (const cacheName of cacheNames) {
+                        const cache = await caches.open(cacheName);
+                        const keys = await cache.keys();
+                        html += `<li><strong>${cacheName}:</strong> ${keys.length} items cached</li>`;
+                    }
+                    
+                    html += '</ul>';
+                    cacheStatus.innerHTML = html;
+                } catch (error) {
+                    cacheStatus.innerHTML = `<span class="text-danger">Error checking caches: ${error.message}</span>`;
+                }
+            } else {
+                cacheStatus.innerHTML = '<span class="text-warning">Cache API not supported</span>';
+            }
+        }
+        
+        // Event listeners
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Initialize
+        updateConnectionStatus();
+        checkServiceWorker();
+        checkCaches();
+        
+        // Register service worker if not already registered
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('SW registered:', registration);
+                })
+                .catch(error => {
+                    console.log('SW registration failed:', error);
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - SIMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --maroon-primary: #800020;
+            --maroon-secondary: #a0002a;
+            --maroon-light: rgba(128, 0, 32, 0.1);
+        }
+        body {
+            background: linear-gradient(135deg, var(--maroon-primary) 0%, var(--maroon-secondary) 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .offline-container {
+            text-align: center;
+            max-width: 500px;
+            padding: 2rem;
+        }
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        .offline-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        .offline-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .btn-retry, .btn-test {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            margin: 0 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .btn-retry:hover, .btn-test:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: white;
+            transform: translateY(-2px);
+        }
+        .status-indicator {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .cached-content {
+            margin-top: 2rem;
+            text-align: left;
+        }
+        .cached-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .cached-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        .cached-item i {
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+        @media (max-width: 768px) {
+            .offline-container {
+                padding: 1rem;
+            }
+            .offline-title {
+                font-size: 2rem;
+            }
+            .offline-description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">
+            <i class="bi bi-wifi-off"></i>
+        </div>
+        
+        <h1 class="offline-title">You're Offline</h1>
+        
+        <p class="offline-description">
+            No internet connection detected. Don't worry - you can still access some cached features of SIMS while offline.
+        </p>
+        
+        <button class="btn btn-retry" onclick="checkConnection()">
+            <i class="bi bi-arrow-clockwise me-2"></i>
+            Try Again
+        </button>
+        
+        <a href="/pwa-test.html" class="btn btn-test">
+            <i class="bi bi-tools me-2"></i>
+            PWA Test Page
+        </a>
+        
+        <div class="status-indicator" id="status">
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                <span>Checking connection status...</span>
+            </div>
+        </div>
+        
+        <div class="cached-content">
+            <h5 class="mb-3">Available Offline:</h5>
+            <div id="cached-routes-container">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                    <span>Loading cached routes...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Load cached routes from the JSON file
+        async function loadCachedRoutes() {
+            const container = document.getElementById('cached-routes-container');
+            
+            try {
+                const response = await fetch('/navigation/offline-routes.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Clear loading indicator
+                    container.innerHTML = '';
+                    
+                    // Add each route to the container
+                    data.routes.forEach(route => {
+                        if (route.cacheable) {
+                            const item = document.createElement('div');
+                            item.className = 'cached-item';
+                            item.onclick = () => tryNavigate(route.path);
+                            
+                            item.innerHTML = `
+                                <i class="bi bi-${route.icon}"></i>
+                                <span>${route.name}</span>
+                            `;
+                            
+                            container.appendChild(item);
+                        }
+                    });
+                } else {
+                    throw new Error('Failed to load routes');
+                }
+            } catch (error) {
+                console.error('Error loading cached routes:', error);
+                container.innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Could not load cached routes
+                    </div>
+                `;
+            }
+        }
+        
+        function checkConnection() {
+            const status = document.getElementById('status');
+            status.innerHTML = `
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                    <span>Checking connection...</span>
+                </div>
+            `;
+            
+            // Simulate network check
+            fetch('/', { method: 'HEAD', cache: 'no-cache' })
+                .then(() => {
+                    status.innerHTML = `
+                        <div class="d-flex align-items-center justify-content-center text-success">
+                            <i class="bi bi-check-circle me-2"></i>
+                            <span>Connection restored! Redirecting...</span>
+                        </div>
+                    `;
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1500);
+                })
+                .catch(() => {
+                    status.innerHTML = `
+                        <div class="d-flex align-items-center justify-content-center text-warning">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            <span>Still offline. Please check your connection.</span>
+                        </div>
+                    `;
+                });
+        }
+        
+        function tryNavigate(url) {
+            if ('serviceWorker' in navigator) {
+                // Try to navigate to cached page
+                window.location.href = url;
+            } else {
+                alert('Service Worker not supported. Cannot access cached content.');
+            }
+        }
+        
+        // Auto-check connection every 30 seconds
+        setInterval(checkConnection, 30000);
+        
+        // Initial check after 2 seconds
+        setTimeout(checkConnection, 2000);
+        
+        // Load cached routes when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCachedRoutes();
+            checkConnection();
+        });
+        
+        // Listen for online/offline events
+        window.addEventListener('online', () => {
+            document.getElementById('status').innerHTML = `
+                <div class="d-flex align-items-center justify-content-center text-success">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <span>Connection restored! Redirecting...</span>
+                </div>
+            `;
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1500);
+        });
+        
+        window.addEventListener('offline', () => {
+            document.getElementById('status').innerHTML = `
+                <div class="d-flex align-items-center justify-content-center text-danger">
+                    <i class="bi bi-wifi-off me-2"></i>
+                    <span>Connection lost</span>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

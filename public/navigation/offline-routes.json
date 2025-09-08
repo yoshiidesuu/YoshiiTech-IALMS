@@ -1,0 +1,40 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "name": "Home",
+      "icon": "house",
+      "cacheable": true
+    },
+    {
+      "path": "/dashboard",
+      "name": "Dashboard",
+      "icon": "speedometer2",
+      "cacheable": true
+    },
+    {
+      "path": "/profile",
+      "name": "Profile",
+      "icon": "person-circle",
+      "cacheable": true
+    },
+    {
+      "path": "/admin/users",
+      "name": "User Management",
+      "icon": "people",
+      "cacheable": true
+    },
+    {
+      "path": "/pwa-test.html",
+      "name": "PWA Test",
+      "icon": "tools",
+      "cacheable": true
+    },
+    {
+      "path": "/offline.html",
+      "name": "Offline Page",
+      "icon": "wifi-off",
+      "cacheable": true
+    }
+  ]
+}

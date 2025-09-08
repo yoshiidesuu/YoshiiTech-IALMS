@@ -1,0 +1,64 @@
+<svg width="375" height="667" viewBox="0 0 375 667" xmlns="http://www.w3.org/2000/svg">
+  <rect width="375" height="667" fill="#f8f9fa"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="375" height="60" fill="#800020"/>
+  <text x="20" y="35" font-family="Arial, sans-serif" font-size="16" fill="white" font-weight="bold">SIMS</text>
+  <circle cx="340" cy="30" r="15" fill="rgba(255,255,255,0.2)"/>
+  <text x="335" y="35" font-family="Arial, sans-serif" font-size="12" fill="white">☰</text>
+  
+  <!-- Main Content -->
+  <rect x="0" y="60" width="375" height="607" fill="white"/>
+  
+  <!-- Title -->
+  <text x="20" y="100" font-family="Arial, sans-serif" font-size="24" fill="#2c3e50" font-weight="bold">Dashboard</text>
+  
+  <!-- Cards -->
+  <rect x="20" y="120" width="335" height="80" fill="#3498db" rx="8"/>
+  <text x="30" y="145" font-family="Arial, sans-serif" font-size="12" fill="white">Total Students</text>
+  <text x="30" y="180" font-family="Arial, sans-serif" font-size="28" fill="white" font-weight="bold">1,234</text>
+  
+  <rect x="20" y="220" width="160" height="80" fill="#2ecc71" rx="8"/>
+  <text x="30" y="245" font-family="Arial, sans-serif" font-size="12" fill="white">Active Courses</text>
+  <text x="30" y="280" font-family="Arial, sans-serif" font-size="24" fill="white" font-weight="bold">56</text>
+  
+  <rect x="195" y="220" width="160" height="80" fill="#e74c3c" rx="8"/>
+  <text x="205" y="245" font-family="Arial, sans-serif" font-size="12" fill="white">Pending Tasks</text>
+  <text x="205" y="280" font-family="Arial, sans-serif" font-size="24" fill="white" font-weight="bold">12</text>
+  
+  <!-- Recent Activity -->
+  <text x="20" y="340" font-family="Arial, sans-serif" font-size="18" fill="#2c3e50" font-weight="bold">Recent Students</text>
+  
+  <!-- List items -->
+  <rect x="20" y="360" width="335" height="50" fill="#f8f9fa" rx="4"/>
+  <circle cx="40" cy="385" r="15" fill="#3498db"/>
+  <text x="35" y="390" font-family="Arial, sans-serif" font-size="12" fill="white">JD</text>
+  <text x="65" y="380" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" font-weight="bold">John Doe</text>
+  <text x="65" y="395" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d">Computer Science</text>
+  
+  <rect x="20" y="420" width="335" height="50" fill="white" rx="4"/>
+  <circle cx="40" cy="445" r="15" fill="#2ecc71"/>
+  <text x="35" y="450" font-family="Arial, sans-serif" font-size="12" fill="white">JS</text>
+  <text x="65" y="440" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" font-weight="bold">Jane Smith</text>
+  <text x="65" y="455" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d">Mathematics</text>
+  
+  <rect x="20" y="480" width="335" height="50" fill="#f8f9fa" rx="4"/>
+  <circle cx="40" cy="505" r="15" fill="#e74c3c"/>
+  <text x="35" y="510" font-family="Arial, sans-serif" font-size="12" fill="white">MJ</text>
+  <text x="65" y="500" font-family="Arial, sans-serif" font-size="14" fill="#2c3e50" font-weight="bold">Mike Johnson</text>
+  <text x="65" y="515" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d">Physics</text>
+  
+  <!-- Bottom Navigation -->
+  <rect x="0" y="617" width="375" height="50" fill="#2c3e50"/>
+  <circle cx="75" cy="642" r="12" fill="#3498db"/>
+  <text x="70" y="647" font-family="Arial, sans-serif" font-size="10" fill="white">🏠</text>
+  
+  <circle cx="150" cy="642" r="12" fill="rgba(255,255,255,0.3)"/>
+  <text x="145" y="647" font-family="Arial, sans-serif" font-size="10" fill="white">👥</text>
+  
+  <circle cx="225" cy="642" r="12" fill="rgba(255,255,255,0.3)"/>
+  <text x="220" y="647" font-family="Arial, sans-serif" font-size="10" fill="white">📚</text>
+  
+  <circle cx="300" cy="642" r="12" fill="rgba(255,255,255,0.3)"/>
+  <text x="295" y="647" font-family="Arial, sans-serif" font-size="10" fill="white">⚙️</text>
+</svg>

@@ -1,0 +1,28 @@
+{
+  "_tinymce-Ch1ItS5C.js": {
+    "file": "assets/tinymce-Ch1ItS5C.js",
+    "name": "tinymce"
+  },
+  "_vendor-CdnfLw8p.js": {
+    "file": "assets/vendor-CdnfLw8p.js",
+    "name": "vendor"
+  },
+  "resources/css/app.scss": {
+    "file": "assets/app-KGyycx-Z.css",
+    "src": "resources/css/app.scss",
+    "isEntry": true,
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DXNAQ1Ev.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-CdnfLw8p.js",
+      "_tinymce-Ch1ItS5C.js"
+    ]
+  }
+}

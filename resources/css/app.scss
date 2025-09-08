@@ -1,0 +1,112 @@
+// Custom Bootstrap Variables - Maroon Theme
+$primary: #800020; // Maroon color
+$secondary: #6c757d;
+$success: #198754;
+$info: #0dcaf0;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #212529;
+
+// Custom theme colors
+$maroon: #800020;
+$maroon-light: #a0002a;
+$maroon-dark: #600018;
+
+// Bootstrap theme customization
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+  "maroon": $maroon,
+  "maroon-light": $maroon-light,
+  "maroon-dark": $maroon-dark
+);
+
+// Import Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+// Custom styles for institutional design
+.navbar-brand {
+  font-weight: 600;
+  color: $maroon !important;
+}
+
+.btn-primary {
+  background-color: $maroon;
+  border-color: $maroon;
+  
+  &:hover {
+    background-color: $maroon-dark;
+    border-color: $maroon-dark;
+  }
+}
+
+.bg-maroon {
+  background-color: $maroon !important;
+}
+
+.text-maroon {
+  color: $maroon !important;
+}
+
+.border-maroon {
+  border-color: $maroon !important;
+}
+
+// Institutional layout styles
+.main-content {
+  min-height: calc(100vh - 56px);
+}
+
+.sidebar {
+  background-color: $maroon;
+  min-height: 100vh;
+}
+
+.sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  
+  &:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  &.active {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+// Additional custom styles for the application
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  box-shadow: 0 20px 40px rgba(128, 0, 32, 0.2);
+  border-radius: 15px;
+}
+
+.logo-container {
+  background: white;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(128, 0, 32, 0.3);
+  margin-bottom: 2rem;
+}

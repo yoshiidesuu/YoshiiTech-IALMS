@@ -1,0 +1,14 @@
+<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+  <rect width="96" height="96" fill="#800020" rx="12"/>
+  <g fill="white">
+    <!-- Book icon -->
+    <rect x="20" y="25" width="56" height="46" rx="4" fill="none" stroke="white" stroke-width="2"/>
+    <rect x="24" y="29" width="48" height="38" rx="2" fill="white" opacity="0.1"/>
+    <line x1="48" y1="25" x2="48" y2="71" stroke="white" stroke-width="2"/>
+    <!-- Student cap -->
+    <path d="M48 15 L65 22 L48 29 L31 22 Z" fill="white"/>
+    <path d="M65 22 L65 32 C65 35 58 38 48 38 C38 38 31 35 31 32 L31 22" fill="none" stroke="white" stroke-width="1.5"/>
+    <circle cx="68" cy="25" r="2" fill="white"/>
+    <line x1="68" y1="27" x2="68" y2="32" stroke="white" stroke-width="1.5"/>
+  </g>
+</svg>
