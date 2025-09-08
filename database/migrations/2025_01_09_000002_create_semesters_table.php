@@ -37,8 +37,7 @@ return new class extends Migration
             // Unique constraint to prevent duplicate semester names within the same academic year
             $table->unique(['academic_year_id', 'name'], 'unique_semester_per_academic_year');
             
-            // Unique constraint to ensure only one current semester per academic year
-            $table->unique(['academic_year_id', 'is_current'], 'unique_current_semester_per_year');
+            // Note: Unique constraint for current semester will be handled at application level
         });
     }
 

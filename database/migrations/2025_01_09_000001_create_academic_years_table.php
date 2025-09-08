@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->timestamp('archived_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             
             // Indexes for better performance
             $table->index('status');
@@ -28,8 +29,7 @@ return new class extends Migration
             $table->index(['start_date', 'end_date']);
             $table->index('archived_at');
             
-            // Ensure only one current academic year
-            $table->unique(['is_current'], 'unique_current_academic_year');
+            // Note: Only one current academic year constraint is handled at application level
         });
     }
 

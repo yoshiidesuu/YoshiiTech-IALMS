@@ -24,8 +24,7 @@ return new class extends Migration
             // Unique constraint to prevent duplicate prerequisites
             $table->unique(['subject_id', 'prerequisite_id'], 'unique_subject_prerequisite');
             
-            // Prevent a subject from being its own prerequisite
-            $table->check('subject_id != prerequisite_id');
+            // Note: Self-prerequisite prevention is handled at application level
         });
     }
 

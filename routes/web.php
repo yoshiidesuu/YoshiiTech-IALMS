@@ -166,6 +166,10 @@ Route::middleware([
              ->name('semesters.set-current');
         Route::patch('semesters/{semester}/toggle-enrollment', [App\Http\Controllers\Admin\SemesterController::class, 'toggleEnrollment'])
              ->name('semesters.toggle-enrollment');
+        Route::patch('semesters/{semester}/open-enrollment', [App\Http\Controllers\Admin\SemesterController::class, 'openEnrollment'])
+             ->name('semesters.open-enrollment');
+        Route::patch('semesters/{semester}/close-enrollment', [App\Http\Controllers\Admin\SemesterController::class, 'closeEnrollment'])
+             ->name('semesters.close-enrollment');
         
         // Subject Management Routes
         Route::resource('subjects', App\Http\Controllers\Admin\SubjectController::class);
@@ -190,12 +194,12 @@ Route::middleware([
              ->name('policies.create-version');
         
         // Grade Encoding Period Management Routes
-        Route::resource('grade-periods', App\Http\Controllers\Admin\GradeEncodingPeriodController::class);
-        Route::patch('grade-periods/{gradePeriod}/toggle-status', [App\Http\Controllers\Admin\GradeEncodingPeriodController::class, 'toggleStatus'])
-             ->name('grade-periods.toggle-status');
-        Route::patch('grade-periods/{gradePeriod}/set-current', [App\Http\Controllers\Admin\GradeEncodingPeriodController::class, 'setCurrent'])
-             ->name('grade-periods.set-current');
-        Route::post('grade-periods/{gradePeriod}/extend-deadline', [App\Http\Controllers\Admin\GradeEncodingPeriodController::class, 'extendDeadline'])
-             ->name('grade-periods.extend-deadline');
+        Route::resource('grade-encoding-periods', App\Http\Controllers\Admin\GradeEncodingPeriodController::class);
+        Route::patch('grade-encoding-periods/{gradePeriod}/toggle-status', [App\Http\Controllers\Admin\GradeEncodingPeriodController::class, 'toggleStatus'])
+             ->name('grade-encoding-periods.toggle-status');
+        Route::patch('grade-encoding-periods/{gradePeriod}/set-current', [App\Http\Controllers\Admin\GradeEncodingPeriodController::class, 'setCurrent'])
+             ->name('grade-encoding-periods.set-current');
+        Route::post('grade-encoding-periods/{gradePeriod}/extend-deadline', [App\Http\Controllers\Admin\GradeEncodingPeriodController::class, 'extendDeadline'])
+             ->name('grade-encoding-periods.extend-deadline');
       });
 });

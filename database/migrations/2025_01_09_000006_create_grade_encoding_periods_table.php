@@ -43,9 +43,7 @@ return new class extends Migration
             // Unique constraint to prevent overlapping periods of same type
             $table->unique(['academic_year_id', 'semester_id', 'grade_type'], 'unique_period_per_semester_grade_type');
             
-            // Check constraints
-            $table->check('end_date > start_date', 'check_end_date_after_start_date');
-            $table->check('extension_deadline IS NULL OR extension_deadline > end_date', 'check_extension_after_end_date');
+            // Note: Date validation constraints are handled at application level
         });
     }
 

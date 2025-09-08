@@ -83,7 +83,8 @@ class RolePermissionSeeder extends Seeder
             ['name' => 'classes.manage', 'display_name' => 'Manage Classes', 'module' => 'classes'],
             ['name' => 'curriculum.manage', 'display_name' => 'Manage Curriculum', 'module' => 'curriculum'],
             ['name' => 'policies.manage', 'display_name' => 'Manage Policies', 'module' => 'policies'],
-            
+            ['name' => 'grade-encoding-periods.manage', 'display_name' => 'Manage Grade Encoding Periods', 'module' => 'grades'],
+
             // Enrollment & Admission
             ['name' => 'enrollment.manage', 'display_name' => 'Manage Enrollment', 'module' => 'enrollment'],
             ['name' => 'admission.manage', 'display_name' => 'Manage Admission', 'module' => 'admission'],
@@ -114,7 +115,7 @@ class RolePermissionSeeder extends Seeder
             'super_admin' => array_column($permissions, 'name'), // All permissions
             'admin' => [
                 'users.manage', 'roles.manage', 'permissions.manage', 'configurations.manage', 'settings.manage',
-                'academic.manage', 'students.manage', 'grades.manage', 'classes.manage',
+                'academic.manage', 'students.manage', 'grades.manage', 'grade-encoding-periods.manage', 'classes.manage',
                 'curriculum.manage', 'policies.manage', 'enrollment.manage', 'admission.manage',
                 'finance.manage', 'reports.view', 'reports.generate'
             ],

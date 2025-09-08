@@ -77,7 +77,7 @@ class GradeEncodingPeriodController extends Controller
             $query->whereDate('end_date', '<=', $request->end_date);
         }
 
-        $periods = $query->orderBy('start_date', 'desc')
+        $gradeEncodingPeriods = $query->orderBy('start_date', 'desc')
                         ->paginate(15)
                         ->withQueryString();
 
@@ -86,7 +86,15 @@ class GradeEncodingPeriodController extends Controller
                            ->orderBy('name')
                            ->get(['id', 'name', 'academic_year_id']);
 
-        return view('admin.grade-encoding-periods.index', compact('periods', 'academicYears', 'semesters'));
+        // Calculate statistics
+        $statistics = [
+            'total' => GradeEncodingPeriod::count(),
+            'active' => GradeEncodingPeriod::where('status', GradeEncodingPeriod::STATUS_ACTIVE)->count(),
+            'upcoming' => GradeEncodingPeriod::upcoming()->count(),
+            'expired' => GradeEncodingPeriod::expired()->count(),
+        ];
+
+        return view('admin.grade_encoding_periods.index', compact('gradeEncodingPeriods', 'academicYears', 'semesters', 'statistics'));
     }
 
     /**
@@ -99,7 +107,7 @@ class GradeEncodingPeriodController extends Controller
                            ->orderBy('name')
                            ->get(['id', 'name', 'academic_year_id']);
 
-        return view('admin.grade-encoding-periods.create', compact('academicYears', 'semesters'));
+        return view('admin.grade_encoding_periods.create', compact('academicYears', 'semesters'));
     }
 
     /**
@@ -180,7 +188,7 @@ class GradeEncodingPeriodController extends Controller
     {
         $gradeEncodingPeriod->load(['academicYear', 'semester', 'creator']);
 
-        return view('admin.grade-encoding-periods.show', compact('gradeEncodingPeriod'));
+        return view('admin.grade_encoding_periods.show', compact('gradeEncodingPeriod'));
     }
 
     /**
@@ -199,7 +207,7 @@ class GradeEncodingPeriodController extends Controller
                            ->orderBy('name')
                            ->get(['id', 'name', 'academic_year_id']);
 
-        return view('admin.grade-encoding-periods.edit', compact('gradeEncodingPeriod', 'academicYears', 'semesters'));
+        return view('admin.grade_encoding_periods.edit', compact('gradeEncodingPeriod', 'academicYears', 'semesters'));
     }
 
     /**

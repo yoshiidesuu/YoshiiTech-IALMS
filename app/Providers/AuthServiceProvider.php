@@ -79,6 +79,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasPermission('policies.manage');
         });
 
+        Gate::define('grade-encoding-periods.manage', function (User $user) {
+            return $user->hasPermission('grade-encoding-periods.manage');
+        });
+
         Gate::define('enrollment.manage', function (User $user) {
             return $user->hasPermission('enrollment.manage');
         });

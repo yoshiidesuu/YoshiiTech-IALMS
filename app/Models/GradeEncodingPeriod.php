@@ -162,6 +162,26 @@ class GradeEncodingPeriod extends Model
     }
 
     /**
+     * Scope a query to only include upcoming periods.
+     */
+    public function scopeUpcoming(Builder $query): Builder
+    {
+        $now = Carbon::now();
+        return $query->where('start_date', '>', $now)
+                    ->whereIn('status', [self::STATUS_DRAFT, self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * Scope a query to only include expired periods.
+     */
+    public function scopeExpired(Builder $query): Builder
+    {
+        $now = Carbon::now();
+        return $query->where('end_date', '<', $now)
+                    ->where('status', '!=', self::STATUS_CLOSED);
+    }
+
+    /**
      * Check if the period is active
      *
      * @return bool
