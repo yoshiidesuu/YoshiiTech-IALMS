@@ -57,8 +57,8 @@
 
     <div class="d-flex">
         <!-- Desktop Sidebar -->
-        <nav class="sidebar text-white d-none d-lg-block" style="width: 250px; min-height: 100vh;">
-            <div class="p-3">
+        <nav class="sidebar text-white d-none d-lg-block position-fixed" style="width: 250px; height: 100vh; top: 0; left: 0; z-index: 1000;">
+            <div class="p-3 h-100 d-flex flex-column">
                 <div class="d-flex align-items-center mb-4">
                     @if(config('app.logo_path'))
                         <img src="{{ config('app.logo_path') }}" alt="{{ config('app.institution_name', 'Institution') }}" style="height: 40px;" class="me-3">
@@ -68,7 +68,7 @@
                         <small class="text-white-50">{{ config('app.system_title', 'Management System') }}</small>
                     </div>
                 </div>
-                <ul class="nav flex-column">
+                <ul class="nav flex-column flex-grow-1 pb-3">
                     <li class="nav-item mb-2">
                         <a href="{{ route('dashboard') }}" class="nav-link text-white-50 hover-text-white">
                             <i class="bi bi-speedometer2 me-2"></i> Dashboard
@@ -164,6 +164,53 @@
                      @endcan
                     
                     <hr class="text-white-50">
+                    
+                    <!-- Academic Management Section -->
+                    <li class="nav-item mb-1">
+                        <small class="text-white-50 text-uppercase fw-bold px-3">Academic Management</small>
+                    </li>
+                    
+                    @can('academic.manage')
+                    <li class="nav-item mb-2">
+                        <a href="{{ route('admin.academic-years.index') }}" class="nav-link text-white-50 hover-text-white {{ request()->routeIs('admin.academic-years.*') ? 'text-white bg-secondary rounded' : '' }}">
+                            <i class="bi bi-calendar-range me-2"></i> Academic Years
+                        </a>
+                    </li>
+                    @endcan
+                    
+                    @can('academic.manage')
+                    <li class="nav-item mb-2">
+                        <a href="{{ route('admin.semesters.index') }}" class="nav-link text-white-50 hover-text-white {{ request()->routeIs('admin.semesters.*') ? 'text-white bg-secondary rounded' : '' }}">
+                            <i class="bi bi-calendar3 me-2"></i> Semesters
+                        </a>
+                    </li>
+                    @endcan
+                    
+                    @can('academic.manage')
+                    <li class="nav-item mb-2">
+                        <a href="{{ route('admin.subjects.index') }}" class="nav-link text-white-50 hover-text-white {{ request()->routeIs('admin.subjects.*') ? 'text-white bg-secondary rounded' : '' }}">
+                            <i class="bi bi-book me-2"></i> Subjects
+                        </a>
+                    </li>
+                    @endcan
+                    
+                    @can('policies.manage')
+                    <li class="nav-item mb-2">
+                        <a href="{{ route('admin.policies.index') }}" class="nav-link text-white-50 hover-text-white {{ request()->routeIs('admin.policies.*') ? 'text-white bg-secondary rounded' : '' }}">
+                            <i class="bi bi-file-text me-2"></i> Policies
+                        </a>
+                    </li>
+                    @endcan
+                    
+                    @can('grades.manage')
+                    <li class="nav-item mb-2">
+                        <a href="{{ route('admin.grade-encoding-periods.index') }}" class="nav-link text-white-50 hover-text-white {{ request()->routeIs('admin.grade-encoding-periods.*') ? 'text-white bg-secondary rounded' : '' }}">
+                            <i class="bi bi-clipboard-data me-2"></i> Grade Encoding Periods
+                        </a>
+                    </li>
+                    @endcan
+                    
+                    <hr class="text-white-50">
                      
                      <!-- PWA Install Button -->
                      <li class="nav-item mb-2">
@@ -198,7 +245,7 @@
                 </div>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
+            <div class="offcanvas-body" style="overflow-y: auto;">
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
                         <a href="{{ route('dashboard') }}" class="nav-link text-white-50 hover-text-white">
@@ -296,6 +343,53 @@
                      
                      <hr class="text-white-50">
                      
+                     <!-- Academic Management Section -->
+                     <li class="nav-item mb-1">
+                         <small class="text-white-50 text-uppercase fw-bold px-3">Academic Management</small>
+                     </li>
+                     
+                     @can('academic.manage')
+                     <li class="nav-item mb-2">
+                         <a href="{{ route('admin.academic-years.index') }}" class="nav-link text-white-50 hover-text-white {{ request()->routeIs('admin.academic-years.*') ? 'text-white bg-secondary rounded' : '' }}">
+                             <i class="bi bi-calendar-range me-2"></i> Academic Years
+                         </a>
+                     </li>
+                     @endcan
+                     
+                     @can('academic.manage')
+                     <li class="nav-item mb-2">
+                         <a href="{{ route('admin.semesters.index') }}" class="nav-link text-white-50 hover-text-white {{ request()->routeIs('admin.semesters.*') ? 'text-white bg-secondary rounded' : '' }}">
+                             <i class="bi bi-calendar3 me-2"></i> Semesters
+                         </a>
+                     </li>
+                     @endcan
+                     
+                     @can('academic.manage')
+                     <li class="nav-item mb-2">
+                         <a href="{{ route('admin.subjects.index') }}" class="nav-link text-white-50 hover-text-white {{ request()->routeIs('admin.subjects.*') ? 'text-white bg-secondary rounded' : '' }}">
+                             <i class="bi bi-book me-2"></i> Subjects
+                         </a>
+                     </li>
+                     @endcan
+                     
+                     @can('policies.manage')
+                     <li class="nav-item mb-2">
+                         <a href="{{ route('admin.policies.index') }}" class="nav-link text-white-50 hover-text-white {{ request()->routeIs('admin.policies.*') ? 'text-white bg-secondary rounded' : '' }}">
+                             <i class="bi bi-file-text me-2"></i> Policies
+                         </a>
+                     </li>
+                     @endcan
+                     
+                     @can('grades.manage')
+                     <li class="nav-item mb-2">
+                         <a href="{{ route('admin.grade-encoding-periods.index') }}" class="nav-link text-white-50 hover-text-white {{ request()->routeIs('admin.grade-encoding-periods.*') ? 'text-white bg-secondary rounded' : '' }}">
+                             <i class="bi bi-clipboard-data me-2"></i> Grade Encoding Periods
+                         </a>
+                     </li>
+                     @endcan
+                     
+                     <hr class="text-white-50">
+                     
                      <!-- PWA Install Button -->
                      <li class="nav-item mb-2">
                          <button id="pwa-install-btn" class="nav-link text-white-50 hover-text-white border-0 bg-transparent w-100 text-start d-none" onclick="installPWA()">
@@ -316,7 +410,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-grow-1 w-100">
+        <div class="flex-grow-1 w-100" style="margin-left: 250px;">
             <!-- Desktop Top Navigation -->
             <nav class="navbar navbar-expand-lg top-navbar d-none d-lg-block">
                 <div class="container-fluid">
@@ -413,6 +507,27 @@
         .sidebar {
             background: linear-gradient(180deg, var(--maroon-dark) 0%, #2c3e50 100%) !important;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.3) transparent;
+        }
+        
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(255,255,255,0.5);
         }
         
         .sidebar .nav-link {
@@ -485,6 +600,58 @@
         
         .text-dark {
             color: #212529 !important;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 991.98px) {
+            .flex-grow-1.w-100 {
+                margin-left: 0 !important;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .main-content {
+                padding-left: 0;
+            }
+        }
+        
+        /* Smooth transitions */
+        .sidebar .nav-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Section headers styling */
+        .sidebar small.text-uppercase {
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        /* Improved hover effects */
+        .sidebar .nav-link:hover {
+            background-color: rgba(255,255,255,0.15) !important;
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Active state improvements */
+        .sidebar .nav-link.active,
+        .sidebar .nav-link.text-white.bg-secondary.rounded {
+            background-color: var(--maroon-primary) !important;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(128, 0, 32, 0.4);
+            transform: translateX(3px);
+        }
+        
+        /* Mobile offcanvas improvements */
+        .offcanvas.sidebar {
+            width: 280px !important;
+        }
+        
+        /* Ensure proper spacing */
+        .sidebar .nav-item:last-child {
+            margin-bottom: 0;
         }
     </style>
 

@@ -71,6 +71,14 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasPermission('curriculum.manage');
         });
 
+        Gate::define('academic.manage', function (User $user) {
+            return $user->hasPermission('academic.manage');
+        });
+
+        Gate::define('policies.manage', function (User $user) {
+            return $user->hasPermission('policies.manage');
+        });
+
         Gate::define('enrollment.manage', function (User $user) {
             return $user->hasPermission('enrollment.manage');
         });
