@@ -144,5 +144,58 @@ Route::middleware([
               ->name('file-security.quarantined');
         Route::post('file-security/delete-quarantined', [App\Http\Controllers\Admin\FileSecurityController::class, 'deleteQuarantinedFile'])
               ->name('file-security.deleteQuarantined');
+        
+        // Academic Management Routes (Phase 3)
+        
+        // Academic Year Management Routes
+        Route::resource('academic-years', App\Http\Controllers\Admin\AcademicYearController::class);
+        Route::patch('academic-years/{academicYear}/toggle-status', [App\Http\Controllers\Admin\AcademicYearController::class, 'toggleStatus'])
+             ->name('academic-years.toggle-status');
+        Route::patch('academic-years/{academicYear}/set-current', [App\Http\Controllers\Admin\AcademicYearController::class, 'setCurrent'])
+             ->name('academic-years.set-current');
+        Route::patch('academic-years/{academicYear}/archive', [App\Http\Controllers\Admin\AcademicYearController::class, 'archive'])
+             ->name('academic-years.archive');
+        Route::patch('academic-years/{academicYear}/restore', [App\Http\Controllers\Admin\AcademicYearController::class, 'restore'])
+             ->name('academic-years.restore');
+        
+        // Semester Management Routes
+        Route::resource('semesters', App\Http\Controllers\Admin\SemesterController::class);
+        Route::patch('semesters/{semester}/toggle-status', [App\Http\Controllers\Admin\SemesterController::class, 'toggleStatus'])
+             ->name('semesters.toggle-status');
+        Route::patch('semesters/{semester}/set-current', [App\Http\Controllers\Admin\SemesterController::class, 'setCurrent'])
+             ->name('semesters.set-current');
+        Route::patch('semesters/{semester}/toggle-enrollment', [App\Http\Controllers\Admin\SemesterController::class, 'toggleEnrollment'])
+             ->name('semesters.toggle-enrollment');
+        
+        // Subject Management Routes
+        Route::resource('subjects', App\Http\Controllers\Admin\SubjectController::class);
+        Route::patch('subjects/{subject}/toggle-status', [App\Http\Controllers\Admin\SubjectController::class, 'toggleStatus'])
+             ->name('subjects.toggle-status');
+        Route::get('subjects/search-prerequisites', [App\Http\Controllers\Admin\SubjectController::class, 'searchPrerequisites'])
+             ->name('subjects.search-prerequisites');
+        Route::post('subjects/{subject}/prerequisites', [App\Http\Controllers\Admin\SubjectController::class, 'updatePrerequisites'])
+             ->name('subjects.update-prerequisites');
+        
+        // Policy Management Routes
+        Route::resource('policies', App\Http\Controllers\Admin\PolicyController::class);
+        Route::patch('policies/{policy}/toggle-status', [App\Http\Controllers\Admin\PolicyController::class, 'toggleStatus'])
+             ->name('policies.toggle-status');
+        Route::post('policies/{policy}/publish', [App\Http\Controllers\Admin\PolicyController::class, 'publish'])
+             ->name('policies.publish');
+        Route::post('policies/{policy}/unpublish', [App\Http\Controllers\Admin\PolicyController::class, 'unpublish'])
+             ->name('policies.unpublish');
+        Route::get('policies/{policy}/versions', [App\Http\Controllers\Admin\PolicyController::class, 'getVersions'])
+             ->name('policies.versions');
+        Route::post('policies/{policy}/create-version', [App\Http\Controllers\Admin\PolicyController::class, 'createVersion'])
+             ->name('policies.create-version');
+        
+        // Grade Encoding Period Management Routes
+        Route::resource('grade-periods', App\Http\Controllers\Admin\GradeEncodingPeriodController::class);
+        Route::patch('grade-periods/{gradePeriod}/toggle-status', [App\Http\Controllers\Admin\GradeEncodingPeriodController::class, 'toggleStatus'])
+             ->name('grade-periods.toggle-status');
+        Route::patch('grade-periods/{gradePeriod}/set-current', [App\Http\Controllers\Admin\GradeEncodingPeriodController::class, 'setCurrent'])
+             ->name('grade-periods.set-current');
+        Route::post('grade-periods/{gradePeriod}/extend-deadline', [App\Http\Controllers\Admin\GradeEncodingPeriodController::class, 'extendDeadline'])
+             ->name('grade-periods.extend-deadline');
       });
 });
